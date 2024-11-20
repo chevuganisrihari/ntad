@@ -49,6 +49,17 @@ output_path = r"C:\Users\chevu\uopi\preprocessed_network_traffic.csv"
 data.to_csv(output_path, index=False)
 print(f"\nPreprocessed data saved to: {output_path}")
 # Plot the results
+plt.figure(figsize=(12, 8))
+sns.scatterplot(
+    x='tsne_1', y='tsne_2', hue='is_anomaly', data=data, palette={1: 'red', 0: 'blue'}, alpha=0.7
+)
+plt.title('t-SNE Visualization of Network Traffic Anomalies', fontsize=16)
+plt.xlabel('t-SNE Component 1', fontsize=12)
+plt.ylabel('t-SNE Component 2', fontsize=12)
+plt.legend(title='Anomaly', loc='best', fontsize=10, labels=['Normal', 'Anomaly'])
+plt.grid(visible=True, linestyle='--', alpha=0.6)
+plt.tight_layout()
+plt.show()
 plt.figure(figsize=(10, 6))
 sns.histplot(test_df['value'], bins=50, kde=True, hue=test_df['is_anomaly'], palette={1: 'red', 0: 'blue'})
 plt.title('Distribution of Values with Anomalies Highlighted', fontsize=16)
